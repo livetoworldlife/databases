@@ -32,9 +32,9 @@ app.get('/createdb', (req, res) => {
 // Create tables
 app.get('/createtables', (req, res) => {
   const sqlList = [
-    'CREATE TABLE IF NOT EXISTS Invitee(invitee_no int AUTO_INCREMENT, invitee_name VARCHAR(255) default "Ersin", invited_by VARCHAR(255) NOT NULL, PRIMARY KEY(invitee_no))',
+    'CREATE TABLE IF NOT EXISTS Invitee(invitee_no int AUTO_INCREMENT, invitee_name VARCHAR(255) NOT NULL, invited_by VARCHAR(255) NOT NULL, PRIMARY KEY(invitee_no))',
     'CREATE TABLE IF NOT EXISTS Room(room_no int AUTO_INCREMENT, room_name VARCHAR(255) NOT NULL, floor_number INT NOT NULL, PRIMARY KEY(room_no))',
-    'CREATE TABLE IF NOT EXISTS Meeting(meeting_no int AUTO_INCREMENT, meeting_title VARCHAR(255) default "MYSQL", starting_time DATETIME NOT NULL, ending_time DATETIME NOT NULL, room_no INT NOT NULL, PRIMARY KEY(meeting_no))']
+    'CREATE TABLE IF NOT EXISTS Meeting(meeting_no int AUTO_INCREMENT, meeting_title VARCHAR(255) NOT NULL, starting_time DATETIME NOT NULL, ending_time DATETIME NOT NULL, room_no INT NOT NULL, PRIMARY KEY(meeting_no))']
 
   sqlList.forEach(sql => {
     db.query(sql, (err, result) => {
@@ -48,12 +48,12 @@ app.get('/createtables', (req, res) => {
 // Insert rows to the table
 app.get('/add/:id', (req, res) => {
   let sql = '';
-  if (req.params.id === 'invinitee') {
-    sql = 'INSERT INTO Invitee VALUES(1, "Fred","Linda"), (2, "Ali","Ayse"), (3, "Hans","Caren"), (4, "Nazife","Ersin"), (5, "Edu","Mike");';
+  if (req.params.id === 'invitee') {
+    sql = 'INSERT INTO Invitee(invitee_name,invited_by) VALUES("Fred","Linda"), ("Ali","Ayse"), ("Hans","Caren"), ("Nazife","Ersin"), ("Edu","Mike");';
   } else if (req.params.id === 'room') {
-    sql = "INSERT INTO Room VALUES(10, 'Room10', 0), (20, 'Room20', 1), (30, 'Room30', 2), (40, 'Room40', 3), (50, 'Room50', 4)";
+    sql = "INSERT INTO Room(room_name,floor_number) VALUES('Room10', 0), ('Room20', 1), ('Room30', 2), ('Room40', 3), ('Room50', 4)";
   } else if (req.params.id === 'meeting') {
-    sql = 'INSERT INTO Meeting VALUES(1, "Mysql", "2019-07-01", "2019-07-02", 10), (2, "CSS", "2019-09-01", "2019-09-02", 20), (3, "HTML", "2019-11-01", "2019-11-02", 30), (4, "JavaScript", "2019-07-11", "2019-07-12", 40), (5, "C", "2018-03-21", "2018-03-22", 50);';
+    sql = 'INSERT INTO Meeting(meeting_title,starting_time,ending_time,room_no) VALUES("Mysql", "2019-07-01", "2019-07-02", 10), ("CSS", "2019-09-01", "2019-09-02", 20), ("HTML", "2019-11-01", "2019-11-02", 30), ("JavaScript", "2019-07-11", "2019-07-12", 40), ("C", "2018-03-21", "2018-03-22", 50);';
   } else {
     return res.send(`${req.params.id} couldn't be added.Input only table name `);
   }
