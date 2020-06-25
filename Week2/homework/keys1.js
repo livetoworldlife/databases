@@ -19,12 +19,12 @@ async function seedDatabase() {
       date_of_birth DATE NOT NULL,
       h_index INT NOT NULL,
       gender ENUM('m', 'f') NOT NULL,
-      Collaborator INT,
       PRIMARY KEY (author_no)
     );`;
 
   const ALTER_PK_AUTHORS = `ALTER TABLE Authors
-  ADD CONSTRAINT FK_Collaborator FOREIGN KEY (Collaborator) REFERENCES Collaborators(collaborator_no);`;
+  ADD COLUMN Collaborator INT,
+  ADD CONSTRAINT FK_Collaborator FOREIGN KEY (Collaborator) REFERENCES Authors(author_no);`;
   connection.connect();
 
   try {
