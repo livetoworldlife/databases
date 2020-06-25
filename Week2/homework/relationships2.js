@@ -24,22 +24,6 @@ async function seedDatabase() {
       PRIMARY KEY (paper_id)
     );`;
 
-  const CREATE_COLLABORATOR_TABLE = `
-    CREATE TABLE IF NOT EXISTS Collaborators (
-      collaborator_no INT AUTO_INCREMENT,
-      collaborator_name VARCHAR(50) NOT NULL,
-      gender ENUM('m', 'f') NOT NULL,
-      PRIMARY KEY (collaborator_no)
-    );`;
-
-  const collaborators = [
-    { collaborator_name: 'Mia', gender: 'f' },
-    { collaborator_name: 'Saido', gender: 'm' },
-    { collaborator_name: 'Charlotte', gender: 'f' },
-    { collaborator_name: 'Ahmet', gender: 'm' },
-    { collaborator_name: 'Emma', gender: 'f' }
-  ]
-
   const researchPapers = [
     { paper_title: "The great pleasure of Nightmare Abbey", conference: "Shelley", publish_date: '2020-02-11', h_index: 340, genre: 'Fantasy', author_id: 106 },
     { paper_title: "Sybil by Benjamin Disraeli", conference: "Edgar", publish_date: '2009-10-10', h_index: 200, genre: 'Horror', author_id: 103 },
@@ -75,20 +59,20 @@ async function seedDatabase() {
   ]
 
   const authors = [
-    { author_no: 101, author_name: "Ersin", university: "HYF", date_of_birth: '1986-10-10', h_index: 10, gender: 'm', Collaborator: 3 },
-    { author_no: 102, author_name: "Benno", university: "Amsterdam", date_of_birth: '1996-11-10', h_index: 20, gender: 'm', Collaborator: 1 },
+    { author_no: 101, author_name: "Ersin", university: "HYF", date_of_birth: '1986-10-10', h_index: 10, gender: 'm', Collaborator: null },
+    { author_no: 102, author_name: "Benno", university: "Amsterdam", date_of_birth: '1996-11-10', h_index: 20, gender: 'm', Collaborator: 101 },
     { author_no: 103, author_name: "Henriata", university: "Twente", date_of_birth: '1980-10-03', h_index: 30, gender: 'm' },
-    { author_no: 104, author_name: "Carin", university: "Hengelo", date_of_birth: '1976-10-10', h_index: 40, gender: 'f', Collaborator: 2 },
-    { author_no: 105, author_name: "Sabina", university: "Tonka", date_of_birth: '2000-01-10', h_index: 50, gender: 'f', Collaborator: 4 },
-    { author_no: 106, author_name: "Hans", university: "Assen", date_of_birth: '1966-10-10', h_index: 60, gender: 'm', Collaborator: 3 },
+    { author_no: 104, author_name: "Carin", university: "Hengelo", date_of_birth: '1976-10-10', h_index: 40, gender: 'f', Collaborator: 102 },
+    { author_no: 105, author_name: "Sabina", university: "Tonka", date_of_birth: '2000-01-10', h_index: 50, gender: 'f', Collaborator: 104 },
+    { author_no: 106, author_name: "Hans", university: "Assen", date_of_birth: '1966-10-10', h_index: 60, gender: 'm', Collaborator: 103 },
     { author_no: 107, author_name: "Sergey", university: "Rotherdam", date_of_birth: '1980-11-10', h_index: 70, gender: 'm' },
-    { author_no: 108, author_name: "Nazife", university: "Hengelo", date_of_birth: '1986-11-05', h_index: 80, gender: 'f', Collaborator: 5 },
-    { author_no: 109, author_name: "Oguz", university: "DeHorizon", date_of_birth: '2015-05-10', h_index: 1, gender: 'm', Collaborator: 2 },
-    { author_no: 110, author_name: "Wouter", university: "HYF", date_of_birth: '1984-10-10', h_index: 90, gender: 'm', Collaborator: 5 },
-    { author_no: 111, author_name: "Noer", university: "Borne", date_of_birth: '1983-11-10', h_index: 90, gender: 'm', Collaborator: 1 },
-    { author_no: 112, author_name: "Nisa", university: "Louren", date_of_birth: '1996-10-10', h_index: 80, gender: 'f', Collaborator: 4 },
-    { author_no: 113, author_name: "Martin", university: "Ajax", date_of_birth: '1996-10-10', h_index: 10, gender: 'm', Collaborator: 2 },
-    { author_no: 114, author_name: "Messi", university: "Barca", date_of_birth: '1986-10-22', h_index: 10, gender: 'm', Collaborator: 3 },
+    { author_no: 108, author_name: "Nazife", university: "Hengelo", date_of_birth: '1986-11-05', h_index: 80, gender: 'f', Collaborator: 105 },
+    { author_no: 109, author_name: "Oguz", university: "DeHorizon", date_of_birth: '2015-05-10', h_index: 1, gender: 'm', Collaborator: 106 },
+    { author_no: 110, author_name: "Wouter", university: "HYF", date_of_birth: '1984-10-10', h_index: 90, gender: 'm', Collaborator: null },
+    { author_no: 111, author_name: "Noer", university: "Borne", date_of_birth: '1983-11-10', h_index: 90, gender: 'm', Collaborator: 108 },
+    { author_no: 112, author_name: "Nisa", university: "Louren", date_of_birth: '1996-10-10', h_index: 80, gender: 'f', Collaborator: 107 },
+    { author_no: 113, author_name: "Martin", university: "Ajax", date_of_birth: '1996-10-10', h_index: 10, gender: 'm', Collaborator: null },
+    { author_no: 114, author_name: "Messi", university: "Barca", date_of_birth: '1986-10-22', h_index: 10, gender: 'm', Collaborator: null },
     { author_no: 115, author_name: "Ava", university: "Twente", date_of_birth: '1956-10-10', h_index: 100, gender: 'f' }
   ]
 
@@ -98,11 +82,6 @@ async function seedDatabase() {
   try {
     // call the function that returns promise
     await execQuery(CREATE_RPAPERS_TABLE);
-    await execQuery(CREATE_COLLABORATOR_TABLE);
-
-    collaborators.forEach(async collaborator => {
-      await execQuery('INSERT INTO Collaborators SET ?', collaborator);
-    });
 
     authors.forEach(async author => {
       await execQuery('INSERT INTO Authors SET ?', author);
