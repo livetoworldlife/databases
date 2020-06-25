@@ -11,12 +11,14 @@ const connection = mysql.createConnection({
 const execQuery = util.promisify(connection.query.bind(connection));
 
 async function seedDatabase() {
+  // self join
+  const AUTHORS_NAME = `SELECT a.author_name as Author_Name,c.author_name as Collaborator_Name
+  FROM  userdb.Authors a
+  LEFT JOIN  userdb.Authors c
+  ON a.author_no=c.Collaborator
+  ORDER BY Author_Name;`;
 
-  const AUTHORS_NAME = `SELECT Authors.author_name,Collaborators.collaborator_name
-  FROM Authors
-  LEFT JOIN Collaborators
-  ON Authors.Collaborator=Collaborators.collaborator_no;`;
-
+  // left join
   const AUTHORS_PAPER = `SELECT Authors.*, Research_Papers.paper_title
   FROM  Authors
   LEFT JOIN Research_Papers 
