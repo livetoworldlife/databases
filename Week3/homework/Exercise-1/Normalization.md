@@ -27,9 +27,7 @@ Using the First Normal Form, data redundancy increases, as there will be many co
 
 So, some of the super keys are below.
 <br>
-{id},{id, ...all set of attributes with id }  
-{member_id,food_code}, {member_id,food_description} 
-{member_name,food_code}, {member_name,food_description} 
+{id},{id, ...all set of attributes with id },    
 {member_id, dinner_id, venue_code, food_code}
 
 - Candidate keys are defined as the minimal set of fields which can uniquely identify each record in a table.
@@ -39,8 +37,7 @@ So, the candidate keys are below.
 {member_id,food_code},  
 {member_name,food_description}
 
-- Primary key is a candidate key that is most appropriate to become the main key for any table
-<br>
+- Primary key is a candidate key that is most appropriate to become the main key for any table    
 So, the primary key is {id}.
 
 # 3-How can you develop the set of 2NF tables? (Think of relationships between different tables).
@@ -60,12 +57,12 @@ Also, dinner_date, venue_code, venue_description depend on dinner_id.Therefore, 
 
 * dinners table : dinner_id is Primary Key of the table.
 <br>
-![members](./assets/dinners_table.png)
+![dinners](./assets/dinners_table.png)
 
 
 * main table : id is Primary Key of the table.member_code is Foreign Key which references the primary key(member_id) of members table! Also, dinner_code is Foreign Key which references the primary key(dinner_id) of dinners table!
 <br>
-![members](./assets/main_table.png)
+![main](./assets/main_table.png)
 
 
 
@@ -90,4 +87,4 @@ Transitive dependency occurred because a non-key attribute (food_code) was deter
 
 - as a result main table for 3NF should be that below. Also, food_code is Foreign Key which references the primary key(food_code) of foods table!
 <br>
-![members](./assets/main_3nf.png)
+![mains](./assets/main_3nf.png)
