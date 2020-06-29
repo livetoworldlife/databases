@@ -1,0 +1,17 @@
+{
+  "name": "Exercise-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connectiondoc.js",
+  "scripts": {
+    "start": "mongoDB_CRUD.js"
+  },
+  "keywords": [],
+  "author": "Ersin",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.5.9",
+    "mysql": "^2.18.1",
+    "util": "^0.12.3"
+  }
+}
