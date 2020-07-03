@@ -28,7 +28,7 @@ function getPopulation(Country, name, code, cb) {
 }
 */
 
-/*
+
 function getPopulation(Country, name, code, cb) {
   // Escaping the parameter ( replacing the unwanted characters)
   const sqlQuery = `SELECT Population FROM ` + Country + ` WHERE Name = ` + conn.escape(name) + `and code = ` + conn.escape(code);
@@ -39,7 +39,7 @@ function getPopulation(Country, name, code, cb) {
   }
   );
 }
-*/
+
 
 /*
 function getPopulation(Country, name, code, cb) {
@@ -53,30 +53,9 @@ function getPopulation(Country, name, code, cb) {
   }
   );
 }
-
 */
-function getPopulation(Country, name, code, cb) {
-  // Using a question mark syntax and prepared statement
 
-  const All_QUERIES = [
-    `SET @s = 'SELECT Population FROM ${Country} WHERE Name = ? AND code = ?';`,
-    `PREPARE stmt2 FROM @s;`,
-    `SET @a ='${name}';`,
-    `SET @b ='${code}';`,
-    `EXECUTE stmt2 USING @a, @b;`,
-    `DEALLOCATE PREPARE stmt2;`
-  ];
+getPopulation("country", "Angola' OR 1=1;show full tables;", "", (a, b) => (a === null) ? console.log(b) : console.error(a));
 
-  All_QUERIES.map(query => {
-    conn.query(query, (err, result) => {
-      if (err) cb(err);
-      if (!result.serverStatus) {
-        if (result.length == 0) cb(new Error("Not found"));
-        cb(null, result[0].Population);
-      }
-    });
-  });
-}
-getPopulation("country", "Angola", "AGO", (a, b) => (a === null) ? console.log(b) : console.error(a));
 
 conn.end();
