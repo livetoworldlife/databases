@@ -18,7 +18,8 @@ async function seedDatabase() {
 
     await execQuery('UPDATE account SET balance =balance-1000  WHERE account_number = 101');
     await execQuery('UPDATE account SET balance =balance+1000 WHERE account_number = 102');
-    await execQuery('INSERT INTO account_number(change_number, account_number, amount, changed_date, remark) VALUES (1003,101,1000,"2020-06-24 11:00:13","Tansaction on MY ACCOUNT")');
+    await execQuery('INSERT INTO account_number(change_number, account_number, amount, changed_date, remark) VALUES (1003,101,1000,"2020-06-24 11:00:13","you owe me 1000 €")');
+    await execQuery('INSERT INTO account_number(change_number, account_number, amount, changed_date, remark) VALUES (1004,102,1000,"2020-06-24 11:01:25","you owe me 1000 €")');
     await execQuery("COMMIT");
   } catch (error) {
     console.error(error);
