@@ -34,8 +34,8 @@ So, some of the super keys are below.
 
 So, the candidate keys are below.
 <br>
-{member_id,food_code},  
-{member_name,food_description}
+{member_id,diner_id,food_code},  
+{member_name,diner_id,food_description}
 
 - Primary key is a candidate key that is most appropriate to become the main key for any table    
 So, the primary key is {id}.
